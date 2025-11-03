@@ -27,3 +27,5 @@ while True:
         if decyzja == 't':
             print(f"Wylosowana liczba to: {liczba}")
         pokazano = True
+
+#akutalizacja git
