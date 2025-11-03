@@ -33,4 +33,7 @@ while True:
 
 #komentarz od kolaboranta
 
+
 #komentarzzzzzzzzzzzzzzzzzzzzzz
+#komentarz od ownera wersja1
+
