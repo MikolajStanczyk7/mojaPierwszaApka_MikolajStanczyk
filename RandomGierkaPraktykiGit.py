@@ -19,7 +19,10 @@ while True:
     elif strzal > liczba:
         print("Za dużo!")
     else:
-        print(f"Brawo! Odgadłeś liczbę w {proba} próbach.")
+        if proba == 1:
+            print("Jesteś super! Powinieneś zostać snajperem!")
+        else:
+            print(f"Brawo! Odgadłeś liczbę w {proba} próbach.")
         break
 
     if proba == 3 and not pokazano:
@@ -28,4 +31,4 @@ while True:
             print(f"Wylosowana liczba to: {liczba}")
         pokazano = True
 
-#akutalizacja git
+#komentarz od kolaboranta
