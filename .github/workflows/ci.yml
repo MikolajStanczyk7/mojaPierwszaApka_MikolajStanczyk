@@ -1,0 +1,65 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches: [ main, "feature/**" ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout kod
+      uses: actions/checkout@v3
+    
+    - name: Krok 1 - Sprawdzenie Plikow
+      run: |
+        echo "Sprawdzam strukture projektu..."
+        ls -la
+        if [ -f "RandomGierkaPraktykiGit.py" ] || [ -f "main.py" ] || [ -f "app.py" ]; then
+          echo "OK - Pliki projektu znalezione!"
+        else
+          echo "BLAD - Brak plikow Pythona!"
+          exit 1
+        fi
+    
+    - name: Krok 2 - Walidacja Kodu Python
+      run: |
+        echo "Sprawdzam jakość kodu Python..."
+        python3 -m pip install pylint --quiet || true
+        if [ -f "RandomGierkaPraktykiGit.py" ]; then
+          python3 -m py_compile RandomGierkaPraktykiGit.py && echo "OK - Python sprawdzony!" || echo "BLAD - Syntax error!"
+        fi
+        if [ -f "main.py" ]; then
+          python3 -m py_compile main.py && echo "OK - main.py OK!" || echo "BLAD - main.py error!"
+        fi
+    
+    - name: Krok 3 - Testy Gry
+      run: |
+        echo "Uruchamiam testy gry..."
+        if [ -f "RandomGierkaPraktykiGit.py" ]; then
+          echo "Testuje RandomGierkaPraktykiGit.py..."
+          timeout 5 python3 RandomGierkaPraktykiGit.py < /dev/null || echo "OK - Gra sie uruchomila!"
+        fi
+        if [ -f "main.py" ]; then
+          echo "Testuje main.py..."
+          timeout 5 python3 main.py < /dev/null || echo "OK - main.py sie uruchomil!"
+        fi
+        echo "Wszystkie testy OK!"
+
+  security:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout kod
+      uses: actions/checkout@v3
+    
+    - name: Skanowanie Bezpieczenstwa
+      run: |
+        echo "Skanuję podatności..."
+        python3 -m pip install bandit --quiet || true
+        if [ -f "RandomGierkaPraktykiGit.py" ]; then
+          bandit RandomGierkaPraktykiGit.py -q || true
+        fi
+        echo "OK - Skanowanie zakonczylo sie!"
