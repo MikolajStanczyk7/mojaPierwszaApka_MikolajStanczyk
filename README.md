@@ -11,4 +11,9 @@ Gra napisana w Pythonie. Projekt edukacyjny do nauki Git i GitHub workflow.
 - Branch Protection
 - Semantyczne Commit Messages
 
+## Linki
+
+- [GitHub Repository](https://github.com/MikolajStanczyk7/mojaPierwszaApka_MikolajStanczyk)
+- [GitHub Actions](https://github.com/MikolajStanczyk7/mojaPierwszaApka_MikolajStanczyk/actions)
+
 
