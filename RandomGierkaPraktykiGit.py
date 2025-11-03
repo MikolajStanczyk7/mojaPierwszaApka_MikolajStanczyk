@@ -30,3 +30,5 @@ while True:
         if decyzja == 't':
             print(f"Wylosowana liczba to: {liczba}")
         pokazano = True
+
+#komentarz od kolaboranta
